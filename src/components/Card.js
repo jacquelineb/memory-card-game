@@ -1,20 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function Card(props) {
-  const [wasClicked, setWasClicked] = useState(false);
-
-  const handleClick = () => {
-    if (!wasClicked) {
-      setWasClicked(true);
-    } else {
-      console.log('you already clicked this');
-    }
-  };
+  function handleClick() {
+    props.onClick(props.card.id);
+  }
 
   return (
     <div className='Card' onClick={handleClick}>
-      <p>{props.name.toUpperCase()}</p>
-      <img className='cardImg' src={props.image} alt={props.name} />
+      <img className='cardImg' src={props.card.imgSrc} alt={props.card.name} />
+      <p className='cardName'>{props.card.name.toUpperCase()}</p>
     </div>
   );
 }
