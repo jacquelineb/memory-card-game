@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function Scores(props) {
+export default function Scoreboard(props) {
   return (
-    <div className='Scores'>
+    <div className='Scoreboard'>
       <p className='score'>Current Score: {props.currScore}</p>
       <p className='score'>Best Score: {props.bestScore}</p>
     </div>

@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Scores from './components/Scores';
-import CardDisplay from './components/CardDisplay';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import Scoreboard from './components/Scoreboard';
+import CardDisplay from './components/CardDisplay';
 import { cardImageImports } from './utils/importCardImages';
 import { shuffle } from './utils/shuffleArray';
 import './MemoryGame.css';
@@ -24,7 +24,7 @@ function MemoryGame() {
     if (currScore > bestScore) {
       setBestScore(currScore);
     }
-  }, [currScore]);
+  }, [currScore, bestScore]);
 
   function handleClick(id) {
     const updatedCards = cards.map((card) => ({ ...card }));
@@ -52,9 +52,9 @@ function MemoryGame() {
     <div className='MemoryGame'>
       <h1 className='gameHeader'>Memory Game</h1>
       <p className='gameDesc'>
-        Click a card to start the game. The game is over if you click card more than once!
+        Click a card to start the game. The game is over if you click a card more than once!
       </p>
-      <Scores currScore={currScore} bestScore={bestScore} />
+      <Scoreboard currScore={currScore} bestScore={bestScore} />
       <CardDisplay cards={cards} onClick={handleClick} />
     </div>
   );
