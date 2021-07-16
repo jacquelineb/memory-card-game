@@ -1,5 +1,22 @@
+body {
+  background-color: #fff4e0;
+}
+
 .MemoryGame {
   text-align: center;
+}
+
+.gameHeader {
+  margin-bottom: 7px;
+}
+
+.gameDesc {
+  margin: 10px auto;
+}
+
+.Scores {
+  margin: 5px auto 5px;
+  height: 40px;
 }
 
 .score {
@@ -10,8 +27,24 @@
 .CardDisplay {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  width: 1040px;
+  gap: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Card {
+  background-color: #600;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  height: 260px;
+}
+
+.cardName {
+  margin-top: 12px;
 }
 
 .cardImg {
-  width: 230px;
+  width: 200px;
 }
