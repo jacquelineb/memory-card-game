@@ -11,16 +11,6 @@ export default function MemoryGame() {
   const [difficulty, setDifficulty] = useState(DEFAULT_DIFFICULTY);
   const [currScore, setCurrScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
-  /*
-  const [cards, setCards] = useState(() => {
-    const initialCards = cardImageImports.map((card) => {
-      card.id = uuidv4();
-      card.clicked = false;
-      return card;
-    });
-    return shuffle(initialCards);
-  });
-  */
   const [cards, setCards] = useState(() => {
     shuffle(GAME_CARDS);
     return shuffle(GAME_CARDS).slice(0, DEFAULT_DIFFICULTY.numCards);
@@ -28,15 +18,13 @@ export default function MemoryGame() {
 
   // idk if this is good
   useEffect(() => {
-    console.log('use effect');
-    console.log('why is this getting called after initial render');
     if (currScore > bestScore) {
       setBestScore(currScore);
     }
   }, [currScore]);
 
   function handleClick(id) {
-    const updatedCards = cards.map((card) => ({ ...card }));
+    let updatedCards = cards.map((card) => ({ ...card }));
     const card = updatedCards.find((card) => {
       return card.id === id;
     });
@@ -48,19 +36,18 @@ export default function MemoryGame() {
         card.clicked = false;
       });
 
-      // instead of doing the above where you reset the cards, just get a new set of cards since it is game over and want to play with new set of cards
+      updatedCards = shuffle(GAME_CARDS).slice(0, difficulty.numCards);
       setCurrScore(0);
     } else {
       setCurrScore(currScore + 1);
       card.clicked = true;
+      shuffle(updatedCards);
     }
 
-    shuffle(updatedCards);
     setCards(updatedCards);
   }
 
   function handleDifficultyChange(difficultyName) {
-    console.log('calling handleDifficultyChange');
     const newDifficulty = DIFFICULTY_LEVELS.find(
       (difficulty) => difficulty.name === difficultyName
     );
