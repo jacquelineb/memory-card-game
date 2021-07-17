@@ -16,9 +16,7 @@ export default function MemoryGame() {
     return shuffle(GAME_CARDS).slice(0, DEFAULT_DIFFICULTY.numCards);
   });
 
-  // idk if this is good
   useEffect(() => {
-    console.log('use effect');
     if (currScore > bestScore) {
       setBestScore(currScore);
     }
