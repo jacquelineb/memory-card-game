@@ -47,6 +47,7 @@ export default function MemoryGame() {
       (difficulty) => difficulty.name === difficultyName
     );
     setDifficulty(newDifficulty);
+    setBestScore(0);
     restart(newDifficulty.numCards);
   }
 
@@ -65,7 +66,7 @@ export default function MemoryGame() {
         <Difficulty value={difficulty.name} onChange={handleDifficultyChange} />
         <Scoreboard currScore={score} bestScore={bestScore} />
       </div>
-      <CardDisplay difficulty={difficulty.name} cards={cards} onCardClick={handleCardClick} />
+      <CardDisplay cards={cards} onCardClick={handleCardClick} gridType={difficulty.name} />
     </div>
   );
 }
