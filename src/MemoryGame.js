@@ -9,7 +9,7 @@ import './MemoryGame.css';
 
 export default function MemoryGame() {
   const [difficulty, setDifficulty] = useState(DEFAULT_DIFFICULTY);
-  const [currScore, setCurrScore] = useState(0);
+  const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [cards, setCards] = useState(() => {
     shuffle(GAME_CARDS);
@@ -17,32 +17,29 @@ export default function MemoryGame() {
   });
 
   useEffect(() => {
-    if (currScore > bestScore) {
-      setBestScore(currScore);
+    if (score > bestScore) {
+      setBestScore(score);
     }
-    if (currScore === difficulty.numCards) {
-      setCards(shuffle(GAME_CARDS).slice(0, difficulty.numCards));
-      setCurrScore(0);
+    if (score === difficulty.numCards) {
+      // win
+      restart(difficulty.numCards);
     }
-  }, [currScore, bestScore, difficulty]);
-  // eslint(react-hooks/exhaustive-deps) kept complaining if i didn't include bestScore and difficulty in deps array
+  }, [score, bestScore, difficulty]);
 
-  function handleClick(id) {
+  function handleCardClick(cardId) {
     let updatedCards = cards.map((card) => ({ ...card }));
     const card = updatedCards.find((card) => {
-      return card.id === id;
+      return card.id === cardId;
     });
 
     if (card.clicked) {
-      updatedCards = shuffle(GAME_CARDS).slice(0, difficulty.numCards);
-      setCurrScore(0);
+      // loss
+      restart(difficulty.numCards);
     } else {
-      setCurrScore(currScore + 1);
       card.clicked = true;
-      shuffle(updatedCards);
+      setScore((prevScore) => prevScore + 1);
+      setCards(shuffle(updatedCards));
     }
-
-    setCards(updatedCards);
   }
 
   function handleDifficultyChange(difficultyName) {
@@ -50,8 +47,12 @@ export default function MemoryGame() {
       (difficulty) => difficulty.name === difficultyName
     );
     setDifficulty(newDifficulty);
-    setCards(shuffle(GAME_CARDS).slice(0, newDifficulty.numCards));
-    setCurrScore(0);
+    restart(newDifficulty.numCards);
+  }
+
+  function restart(numCards) {
+    setCards(shuffle(GAME_CARDS).slice(0, numCards));
+    setScore(0);
   }
 
   return (
@@ -62,9 +63,9 @@ export default function MemoryGame() {
       </p>
       <div>
         <Difficulty value={difficulty.name} onChange={handleDifficultyChange} />
-        <Scoreboard currScore={currScore} bestScore={bestScore} />
+        <Scoreboard currScore={score} bestScore={bestScore} />
       </div>
-      <CardDisplay difficulty={difficulty.name} cards={cards} onClick={handleClick} />
+      <CardDisplay difficulty={difficulty.name} cards={cards} onCardClick={handleCardClick} />
     </div>
   );
 }
