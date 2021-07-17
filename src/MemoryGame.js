@@ -12,7 +12,6 @@ export default function MemoryGame() {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [cards, setCards] = useState(() => {
-    shuffle(GAME_CARDS);
     return shuffle(GAME_CARDS).slice(0, DEFAULT_DIFFICULTY.numCards);
   });
 
@@ -24,7 +23,7 @@ export default function MemoryGame() {
       // win
       restart(difficulty.numCards);
     }
-  }, [score, bestScore, difficulty]);
+  }, [score, bestScore, difficulty.numCards]);
 
   function handleCardClick(cardId) {
     let updatedCards = cards.map((card) => ({ ...card }));
