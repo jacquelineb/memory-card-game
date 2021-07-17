@@ -2,7 +2,6 @@ import React from 'react';
 
 export default function Difficulty(props) {
   function handleChange(e) {
-    console.log(e.target.value);
     props.onChange(e.target.value);
   }
 

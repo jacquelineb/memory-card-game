@@ -18,10 +18,16 @@ export default function MemoryGame() {
 
   // idk if this is good
   useEffect(() => {
+    console.log('use effect');
     if (currScore > bestScore) {
       setBestScore(currScore);
     }
-  }, [currScore]);
+    if (currScore === difficulty.numCards) {
+      setCards(shuffle(GAME_CARDS).slice(0, difficulty.numCards));
+      setCurrScore(0);
+    }
+  }, [currScore, bestScore, difficulty]);
+  // eslint(react-hooks/exhaustive-deps) kept complaining if i didn't include bestScore and difficulty in deps array
 
   function handleClick(id) {
     let updatedCards = cards.map((card) => ({ ...card }));
@@ -30,12 +36,6 @@ export default function MemoryGame() {
     });
 
     if (card.clicked) {
-      // remove this later. but have some kind of way of letting user know they just lost the game
-      alert('you already clicked this card');
-      updatedCards.forEach((card) => {
-        card.clicked = false;
-      });
-
       updatedCards = shuffle(GAME_CARDS).slice(0, difficulty.numCards);
       setCurrScore(0);
     } else {
@@ -54,7 +54,6 @@ export default function MemoryGame() {
     setDifficulty(newDifficulty);
     setCards(shuffle(GAME_CARDS).slice(0, newDifficulty.numCards));
     setCurrScore(0);
-    setBestScore(0);
   }
 
   return (
