@@ -3,7 +3,7 @@ import Card from './Card';
 
 export default function CardDisplay(props) {
   return (
-    <div className='CardDisplay'>
+    <div className={`CardDisplay ${props.difficulty}Grid`}>
       {props.cards.map((card) => {
         return <Card key={card.id} onClick={props.onClick} card={card} />;
       })}

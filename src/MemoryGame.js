@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Scoreboard from './components/Scoreboard';
 import CardDisplay from './components/CardDisplay';
+import Difficulty from './components/Difficulty';
+import Scoreboard from './components/Scoreboard';
 import { cardImageImports } from './utils/importCardImages';
 import { shuffle } from './utils/shuffleArray';
 import './MemoryGame.css';
 
-function MemoryGame() {
+export default function MemoryGame() {
+  const [difficulty, setDifficulty] = useState(DEFAULT_DIFFICULTY);
   const [currScore, setCurrScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
+  /*
   const [cards, setCards] = useState(() => {
     const initialCards = cardImageImports.map((card) => {
       card.id = uuidv4();
@@ -17,14 +20,20 @@ function MemoryGame() {
     });
     return shuffle(initialCards);
   });
+  */
+  const [cards, setCards] = useState(() => {
+    shuffle(GAME_CARDS);
+    return shuffle(GAME_CARDS).slice(0, DEFAULT_DIFFICULTY.numCards);
+  });
 
   // idk if this is good
   useEffect(() => {
     console.log('use effect');
+    console.log('why is this getting called after initial render');
     if (currScore > bestScore) {
       setBestScore(currScore);
     }
-  }, [currScore, bestScore]);
+  }, [currScore]);
 
   function handleClick(id) {
     const updatedCards = cards.map((card) => ({ ...card }));
@@ -38,6 +47,8 @@ function MemoryGame() {
       updatedCards.forEach((card) => {
         card.clicked = false;
       });
+
+      // instead of doing the above where you reset the cards, just get a new set of cards since it is game over and want to play with new set of cards
       setCurrScore(0);
     } else {
       setCurrScore(currScore + 1);
@@ -48,16 +59,55 @@ function MemoryGame() {
     setCards(updatedCards);
   }
 
+  function handleDifficultyChange(difficultyName) {
+    console.log('calling handleDifficultyChange');
+    const newDifficulty = DIFFICULTY_LEVELS.find(
+      (difficulty) => difficulty.name === difficultyName
+    );
+    setDifficulty(newDifficulty);
+    setCards(shuffle(GAME_CARDS).slice(0, newDifficulty.numCards));
+    setCurrScore(0);
+    setBestScore(0);
+  }
+
   return (
     <div className='MemoryGame'>
       <h1 className='gameHeader'>Memory Game</h1>
       <p className='gameDesc'>
         Click a card to start the game. The game is over if you click a card more than once!
       </p>
-      <Scoreboard currScore={currScore} bestScore={bestScore} />
-      <CardDisplay cards={cards} onClick={handleClick} />
+      <div>
+        <Difficulty value={difficulty.name} onChange={handleDifficultyChange} />
+        <Scoreboard currScore={currScore} bestScore={bestScore} />
+      </div>
+      <CardDisplay difficulty={difficulty.name} cards={cards} onClick={handleClick} />
     </div>
   );
 }
 
-export default MemoryGame;
+const GAME_CARDS = cardImageImports.map((card) => {
+  card.id = uuidv4();
+  card.clicked = false;
+  return card;
+});
+
+const DIFFICULTY_LEVELS = [
+  {
+    name: 'easy',
+    numCards: 6,
+  },
+  {
+    name: 'normal',
+    numCards: 12,
+  },
+  {
+    name: 'hard',
+    numCards: 18,
+  },
+  {
+    name: 'challenging',
+    numCards: 24,
+  },
+];
+
+const DEFAULT_DIFFICULTY = DIFFICULTY_LEVELS[0];

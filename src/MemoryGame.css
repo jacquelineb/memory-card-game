@@ -11,26 +11,43 @@ body {
 }
 
 .gameDesc {
-  margin: 10px auto;
+  margin: 8px auto;
 }
 
-.Scores {
-  margin: 5px auto 5px;
+.Scoreboard {
   height: 40px;
 }
 
 .score {
   display: inline-block;
-  margin: 10px 20px 10px;
+  margin: 10px 20px;
 }
 
 .CardDisplay {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  width: 1040px;
   gap: 10px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.easyGrid {
+  grid-template-columns: repeat(3, 1fr);
+  width: 640px;
+}
+
+.normalGrid {
+  grid-template-columns: repeat(4, 1fr);
+  width: 860px;
+}
+
+.hardGrid {
+  grid-template-columns: repeat(6, 1fr);
+  width: 1250px;
+}
+
+.challengingGrid {
+  grid-template-columns: repeat(8, 1fr);
+  width: 1670px;
 }
 
 .Card {
@@ -38,7 +55,7 @@ body {
   color: white;
   font-size: 18px;
   font-weight: bold;
-  height: 260px;
+  width: 200px;
 }
 
 .cardName {
@@ -46,5 +63,5 @@ body {
 }
 
 .cardImg {
-  width: 200px;
+  width: 100%;
 }
