@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import CardDisplay from './components/CardDisplay';
 import Difficulty from './components/Difficulty';
 import Scoreboard from './components/Scoreboard';
@@ -26,8 +25,8 @@ export default function MemoryGame() {
   }, [score, bestScore, difficulty.numCards]);
 
   function handleCardClick(cardId) {
-    let updatedCards = cards.map((card) => ({ ...card }));
-    const card = updatedCards.find((card) => {
+    let cardsCopy = cards.map((card) => ({ ...card }));
+    const card = cardsCopy.find((card) => {
       return card.id === cardId;
     });
 
@@ -37,7 +36,7 @@ export default function MemoryGame() {
     } else {
       card.clicked = true;
       setScore((prevScore) => prevScore + 1);
-      setCards(shuffle(updatedCards));
+      setCards(shuffle(cardsCopy));
     }
   }
 
@@ -70,8 +69,8 @@ export default function MemoryGame() {
   );
 }
 
-const GAME_CARDS = cardImageImports.map((card) => {
-  card.id = uuidv4();
+const GAME_CARDS = cardImageImports.map((card, idx) => {
+  card.id = idx;
   card.clicked = false;
   return card;
 });
