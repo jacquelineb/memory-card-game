@@ -1,6 +1,5 @@
 const context = require.context('../images/cards', false, /\.(jpg)$/);
 function importCardImages(r) {
-  //return r.keys().map(r);
   const imageImports = r.keys().map((item) => {
     const cardObj = {
       name: item.replace('./', '').slice(0, -4),
