@@ -69,33 +69,3 @@ export default function MemoryGame() {
     </div>
   );
 }
-
-/*
-const GAME_CARDS = cardImageImports.map((card, idx) => {
-  card.id = idx;
-  card.clicked = false;
-  return card;
-});
-
-const DIFFICULTY_LEVELS = [
-  {
-    name: 'easy',
-    numCards: 6,
-  },
-  {
-    name: 'normal',
-    numCards: 12,
-  },
-  {
-    name: 'hard',
-    numCards: 18,
-  },
-  {
-    name: 'challenging',
-    numCards: 24,
-  },
-];
-
-const DEFAULT_DIFFICULTY = DIFFICULTY_LEVELS[1];
-
-*/
