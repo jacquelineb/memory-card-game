@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import CardDisplay from './components/CardDisplay';
 import Difficulty from './components/Difficulty';
 import Scoreboard from './components/Scoreboard';
-import { cardImageImports } from './utils/importCardImages';
 import { shuffle } from './utils/shuffleArray';
+import { GAME_CARDS, DIFFICULTY_LEVELS, DEFAULT_DIFFICULTY } from './utils/gameData';
 import './MemoryGame.css';
 
 export default function MemoryGame() {
@@ -56,6 +56,7 @@ export default function MemoryGame() {
 
   return (
     <div className='MemoryGame'>
+      {console.log('rerendering')}
       <h1 className='gameHeader'>Memory Game</h1>
       <p className='gameDesc'>
         Click a card to start the game. The game is over if you click a card more than once!
@@ -69,6 +70,7 @@ export default function MemoryGame() {
   );
 }
 
+/*
 const GAME_CARDS = cardImageImports.map((card, idx) => {
   card.id = idx;
   card.clicked = false;
@@ -95,3 +97,5 @@ const DIFFICULTY_LEVELS = [
 ];
 
 const DEFAULT_DIFFICULTY = DIFFICULTY_LEVELS[1];
+
+*/
