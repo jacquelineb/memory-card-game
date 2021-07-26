@@ -25,6 +25,7 @@ body {
 
 .CardDisplay {
   display: grid;
+  justify-items: center;
   gap: 10px;
   margin-left: auto;
   margin-right: auto;
@@ -59,10 +60,7 @@ body {
   cursor: pointer;
 }
 
-.cardName {
-  margin-top: 12px;
-}
-
 .cardImg {
   width: 100%;
+  display: block;
 }

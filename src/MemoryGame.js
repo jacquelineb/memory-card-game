@@ -56,7 +56,6 @@ export default function MemoryGame() {
 
   return (
     <div className='MemoryGame'>
-      {console.log('rerendering')}
       <h1 className='gameHeader'>Memory Game</h1>
       <p className='gameDesc'>
         Click a card to start the game. The game is over if you click a card more than once!
