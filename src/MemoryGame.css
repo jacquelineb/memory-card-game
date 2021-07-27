@@ -2,19 +2,19 @@ body {
   background-color: #fff4e0;
 }
 
-.MemoryGame {
+.game-container {
   text-align: center;
 }
 
-.gameHeader {
+.game-header {
   margin-bottom: 7px;
 }
 
-.gameDesc {
+.game-desc {
   margin: 8px auto;
 }
 
-.Scoreboard {
+.scoreboard-container {
   height: 40px;
 }
 
@@ -23,7 +23,7 @@ body {
   margin: 10px 20px;
 }
 
-.CardDisplay {
+.card-display {
   display: grid;
   justify-items: center;
   gap: 10px;
@@ -31,27 +31,27 @@ body {
   margin-right: auto;
 }
 
-.easyGrid {
+.easy-grid {
   grid-template-columns: repeat(3, 1fr);
   width: 640px;
 }
 
-.normalGrid {
+.normal-grid {
   grid-template-columns: repeat(4, 1fr);
   width: 860px;
 }
 
-.hardGrid {
+.hard-grid {
   grid-template-columns: repeat(6, 1fr);
   width: 1250px;
 }
 
-.challengingGrid {
+.challenging-grid {
   grid-template-columns: repeat(8, 1fr);
   width: 1670px;
 }
 
-.Card {
+.card {
   background-color: #600;
   color: white;
   font-size: 18px;
@@ -60,7 +60,7 @@ body {
   cursor: pointer;
 }
 
-.cardImg {
+.card-img {
   width: 100%;
   display: block;
 }

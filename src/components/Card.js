@@ -6,9 +6,9 @@ export default function Card(props) {
   }
 
   return (
-    <div className='Card' onClick={handleClick}>
-      <img className='cardImg' src={props.card.imgSrc} alt={props.card.name} />
-      <p className='cardName'>{props.card.name.toUpperCase()}</p>
+    <div className='card' onClick={handleClick}>
+      <img className='card-img' src={props.card.imgSrc} alt={props.card.name} />
+      <p className='card-name'>{props.card.name.toUpperCase()}</p>
     </div>
   );
 }
